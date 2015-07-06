@@ -1,0 +1,20 @@
+{
+  "name": "download-button-concept",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "budo": "^4.1.0",
+    "del": "^1.2.0",
+    "errorify": "^0.2.4",
+    "garnish": "^2.1.3",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.1.0",
+    "gulp-gh-pages": "^0.5.2"
+  },
+  "scripts": {
+    "budo": "budo app/main.js --verbose --dir app --live -- -t  babelify | garnish"
+  },
+  "author": "Eduardo Lopes",
+  "license": "MIT"
+}
