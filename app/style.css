@@ -15,6 +15,7 @@ body{
     cursor: pointer;
     border: 0;
     outline: 0;
+    font-weight: bold;
 }
 
 .button .text{
@@ -22,7 +23,8 @@ body{
 }
 
 .button .done{
-    background: #428315;
+    background: #50a952;
+    color: #eee;
 }
 
 .button .cancel{
@@ -54,8 +56,8 @@ body{
 }
 
 .button .canceling{
-    background: #e2d84f;
-    color: #eee;
+    background: #d2cb5a;
+    color: #181818;
 }
 
 .button.finished .text {
