@@ -85,7 +85,7 @@ function canceling(){
 function finished(){
   count++;
 
-  if(count >= 50){
+  if(count >= 60){
     count = 0;
     $button.classList.remove('downloading', 'finished', 'canceling');
     $button.classList.add('idle', 'just-finished');
