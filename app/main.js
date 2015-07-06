@@ -22,6 +22,7 @@ $button.onclick = function(){
     state.downloading = !state.downloading;
   }
 
+  //Starts download
   if(state.downloading && state.canceling == false){
     count = 0;
     $button.classList.remove('idle', 'canceling', 'finished', 'canceled');
@@ -32,6 +33,7 @@ $button.onclick = function(){
     stateUpdate = fillBar;
     animationFrameID = requestAnimationFrame(update);
   } else if(state.finished == false && state.canceling == false){
+    //cancels download
     count = 0;
     $button.classList.remove('downloading', 'idle', 'canceling', 'canceled');
     $button.classList.add('canceling');
@@ -41,11 +43,13 @@ $button.onclick = function(){
 
 };
 
+//Fills the progress bar
 function fillBar(){
 
   percentage += random.bool(5, 40) ? random.real(0, 0.1) : 0;
   width += ( (canvas.width * percentage) - width) * 0.05;
 
+  //when the download is done
   if(percentage >= 1){
 
     stateUpdate = finishfillBar;
@@ -54,10 +58,12 @@ function fillBar(){
 
 }
 
+//when the download is done
 function finishfillBar(){
 
   width += ((canvas.width * percentage) - width) * 0.9;
 
+  //when the bar is completely filled
   if(width >= (canvas.width * percentage)){
     stateUpdate = finished;
     percentage = Math.min(percentage, 1);
@@ -68,11 +74,12 @@ function finishfillBar(){
 
 }
 
+//When Canceling
 function canceling(){
   count++;
 
+  //wait some time and set as canceled
   if(count >= 50){
-    count = 0;
     $button.classList.remove('downloading', 'finished', 'canceling');
     $button.classList.add('idle', 'canceled');
     state.canceling = false;
@@ -82,9 +89,11 @@ function canceling(){
 
 }
 
+//when the bar is completely filled
 function finished(){
   count++;
 
+  //Wait some time to hide 'done' message
   if(count >= 60){
     count = 0;
     $button.classList.remove('downloading', 'finished', 'canceling');
