@@ -84,8 +84,8 @@ body{
 .button.downloading .cancel,
 .button.canceling .text,
 .button.finished .bar,
-.button.idle.just-finished .done,
-.button.idle:not(.just-finished) .canceling {
+.button.idle .done,
+.button.idle.canceled .canceling {
     animation-duration: 0.3s;
     animation-name: slideout;
     transform: translate(-50%, -100%);

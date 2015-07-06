@@ -24,7 +24,7 @@ $button.onclick = function(){
 
   if(state.downloading && state.canceling == false){
     count = 0;
-    $button.classList.remove('idle', 'canceling', 'finished', 'just-finished');
+    $button.classList.remove('idle', 'canceling', 'finished', 'canceled');
     $button.classList.add('downloading');
     state.finished = false;
     percentage = 0;
@@ -33,7 +33,7 @@ $button.onclick = function(){
     animationFrameID = requestAnimationFrame(update);
   } else if(state.finished == false && state.canceling == false){
     count = 0;
-    $button.classList.remove('downloading', 'idle', 'canceling', 'just-finished');
+    $button.classList.remove('downloading', 'idle', 'canceling', 'canceled');
     $button.classList.add('canceling');
     state.canceling = true;
     stateUpdate = canceling;
@@ -73,8 +73,8 @@ function canceling(){
 
   if(count >= 50){
     count = 0;
-    $button.classList.remove('downloading', 'finished', 'canceling', 'just-finished');
-    $button.classList.add('idle');
+    $button.classList.remove('downloading', 'finished', 'canceling');
+    $button.classList.add('idle', 'canceled');
     state.canceling = false;
     stateUpdate = null;
     cancelAnimationFrame(animationFrameID);
@@ -88,7 +88,7 @@ function finished(){
   if(count >= 60){
     count = 0;
     $button.classList.remove('downloading', 'finished', 'canceling');
-    $button.classList.add('idle', 'just-finished');
+    $button.classList.add('idle');
     state.downloading = false;
     cancelAnimationFrame(animationFrameID);
   }
