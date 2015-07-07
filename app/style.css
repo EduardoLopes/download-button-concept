@@ -50,19 +50,14 @@ body{
 .button .bar,
 .button .done,
 .button .canceling,
-.button .cancel {
-  transform: translate(-50%, -100%);
-  top: 0;
+.button .cancel,
+.button.finished .text {
+  transform: translate(-50%, -150%);
 }
 
 .button .canceling{
     background: #d2cb5a;
     color: #181818;
-}
-
-.button.finished .text {
-    transform: translate(-50%, -100%);
-    top: 0;
 }
 
 /* Set the states of the animations */
@@ -77,21 +72,19 @@ body{
     animation-name: slidein;
     transform: translate(-50%, -50%);
     animation-timing-function: cubic-bezier(0.44, 0.46, 0, 1);
-    top: 50%;
-    left: 50%;
 }
 
 /* slide out animation */
 .button.downloading .text,
 .button.downloading .cancel,
 .button.canceling .text,
+.button.canceling .cancel,
 .button.finished .bar,
 .button.idle .done,
 .button.idle.canceled .canceling {
     animation-duration: 0.3s;
     animation-name: slideout;
-    transform: translate(-50%, -100%);
-    top: 0;
+    transform: translate(-50%, -150%);
     animation-timing-function: cubic-bezier(0.44, 0.46, 0, 1);
 }
 
@@ -99,14 +92,13 @@ body{
 .button.canceling .bar{
     animation-duration: 0.3s;
     animation-name: slideout-left;
-    transform: translate(-100%, -50%);
-    left: 0;
+    transform: translate(-150%, -50%);
     animation-timing-function: cubic-bezier(.67,0,0,1);
 }
 
 @keyframes slidein {
   from {
-    transform: translate(-50%, 100%);
+    transform: translate(-50%, 150%);
   }
 
   to {
@@ -120,7 +112,7 @@ body{
   }
 
   to {
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, -150%);
   }
 }
 
@@ -130,6 +122,6 @@ body{
   }
 
   to {
-    transform: translate(-100%, -50%);
+    transform: translate(-150%, -50%);
   }
 }
