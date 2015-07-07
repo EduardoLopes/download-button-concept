@@ -1,38 +1,69 @@
 *{box-sizing: border-box;}
 
+html {
+    font-family: sans-serif;
+  /* 1 */
+    -ms-text-size-adjust: 100%;
+  /* 2 */
+    -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
 body{
     background: #eee;
 }
 
+.container > * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .container{
   overflow: hidden;
+  width: 180px;
+  height: 60px;
+  background: #181818;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
 }
 
-.button{
-    width: 180px;
-    height: 60px;
-    background: #181818;
-    cursor: pointer;
-    border: 0;
-    outline: 0;
-    font-weight: bold;
+.container .button{
+  background: #181818;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  color: #eee;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: inherit;
 }
 
-.button .text{
-    color: #eee;
-}
-
-.button .done{
+.container .done{
     background: #50a952;
     color: #eee;
 }
 
-.button .cancel{
-    background: RGBA(226,79,82, 0.5);
-    color: #eee;
-    text-align: center;
-    font-size: 1.5em;
+.container .cancel-button{
+  background: RGBA(226,79,82, 1);
+  color: #eee;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  padding: 2px 5px;
+  cursor: pointer;
 }
+
 
 .center{
   position: absolute;
@@ -47,15 +78,15 @@ body{
 }
 
 /*Elemenst that start hidden*/
-.button .bar,
-.button .done,
-.button .canceling,
-.button .cancel,
-.button.finished .text {
+.container .bar,
+.container .done,
+.container .canceling,
+.container .cancel,
+.container.finished .button {
   transform: translate(-50%, -150%);
 }
 
-.button .canceling{
+.container .canceling{
     background: #d2cb5a;
     color: #181818;
 }
@@ -63,11 +94,11 @@ body{
 /* Set the states of the animations */
 
 /* slide in animation */
-.button.downloading .bar,
-.button.idle .text,
-.button.finished .done,
-.button.canceling .canceling,
-.button.downloading:hover > .cancel {
+.container.downloading .bar,
+.container.idle .button,
+.container.finished .done,
+.container.canceling .canceling,
+.container.downloading .cancel {
     animation-duration: 0.3s;
     animation-name: slidein;
     transform: translate(-50%, -50%);
@@ -75,13 +106,13 @@ body{
 }
 
 /* slide out animation */
-.button.downloading .text,
-.button.downloading .cancel,
-.button.canceling .text,
-.button.canceling .cancel,
-.button.finished .bar,
-.button.idle .done,
-.button.idle.canceled .canceling {
+.container.downloading .button,
+.container.finished .cancel,
+.container.canceling .button,
+.container.canceling .cancel,
+.container.finished .bar,
+.container.idle .done,
+.container.idle.canceled .canceling {
     animation-duration: 0.3s;
     animation-name: slideout;
     transform: translate(-50%, -150%);
@@ -89,7 +120,7 @@ body{
 }
 
 /*out left*/
-.button.canceling .bar{
+.container.canceling .bar{
     animation-duration: 0.3s;
     animation-name: slideout-left;
     transform: translate(-150%, -50%);
