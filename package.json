@@ -10,7 +10,8 @@
     "garnish": "^2.1.3",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
-    "gulp-gh-pages": "^0.5.2"
+    "gulp-gh-pages": "^0.5.2",
+    "gulp-rename": "^1.2.2"
   },
   "scripts": {
     "budo": "budo app/main.js --verbose --dir app --live -- -t  babelify | garnish"

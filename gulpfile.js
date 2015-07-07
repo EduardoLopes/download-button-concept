@@ -5,7 +5,7 @@ const budo = require('budo');
 const babelify = require('babelify');
 const errorify = require('errorify');
 const garnish = require('garnish');
-
+const rename = require("gulp-rename");
 const ghPages = require('gulp-gh-pages');
 
 gulp.task('deploy', ['default'], function() {
@@ -68,6 +68,7 @@ gulp.task("babel", ['del'],function () {
 
   return gulp.src("app/main.js")
     .pipe(babel())
+    .pipe(rename("bundle.js"))
     .pipe(gulp.dest("dist"));
 
 });
