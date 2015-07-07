@@ -1,125 +1,135 @@
 *{box-sizing: border-box;}
 
+html {
+    font-family: sans-serif;
+  /* 1 */
+    -ms-text-size-adjust: 100%;
+  /* 2 */
+    -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
 body{
     background: #eee;
 }
 
+.container > * {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .container{
+  overflow: hidden;
+  width: 180px;
+  height: 60px;
+  background: #181818;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.container .button{
+  background: #181818;
+  cursor: pointer;
+  border: 0;
+  outline: 0;
+  color: #eee;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: inherit;
+}
+
+.container .done{
+    background: #50a952;
+    color: #eee;
+}
+
+.container .cancel-button{
+  background: RGBA(226,79,82, 1);
+  color: #eee;
+  text-align: center;
+  right: 0;
+  position: absolute;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+
+.center{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
 }
 
-.button{
-    width: 180px;
-    height: 60px;
-    background: #181818;
-    cursor: pointer;
-    border: 0;
-    outline: 0;
-}
-
-.bar{
+.fill-container{
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -300%);
 }
 
-.text{
-    color: #eee;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/*Elemenst that start hidden*/
+.container .bar,
+.container .done,
+.container .canceling,
+.container .cancel,
+.container.finished .button {
+  transform: translate(-50%, -150%);
 }
 
-.done{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background: #428315;
-    transform: translate(-50%, -300%);
-    line-height: 60px;
+.container .canceling{
+    background: #d2cb5a;
+    color: #181818;
 }
 
-div.canceling{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -300%);
-    line-height: 60px;
-    background: #e2d84f;
-    color: #eee;
-}
+/* Set the states of the animations */
 
-.done span, .cancel span, .canceling span {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-/* in */
-.button.downloading .bar,
-.button.idle .text,
-.button.finished .done,
-.button.canceling .canceling,
-.button.downloading:hover > .cancel{
-    animation-duration: 0.2s;
+/* slide in animation */
+.container.downloading .bar,
+.container.idle .button,
+.container.finished .done,
+.container.canceling .canceling,
+.container.downloading .cancel {
+    animation-duration: 0.3s;
     animation-name: slidein;
     transform: translate(-50%, -50%);
-    animation-timing-function: cubic-bezier(.67,0,0,1);
+    animation-timing-function: cubic-bezier(0.44, 0.46, 0, 1);
 }
 
-.button.finished .text{
-    transform: translate(-50%, -300%);
-}
-
-.button.downloading .cancel{
-    width: 100%;
-    height: 100%;
-    background: RGBA(226,79,82, 0.5);
-    color: #eee;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 1.5em;
-    line-height: 60px;
-}
-
-/*out*/
-.button.downloading .text,
-.button.canceling .bar,
-.button.canceling .text,
-.button.finished .bar,
-.button.idle.just-finished .done,
-.button.idle:not(.just-finished) .canceling,
-.button.downloading > .cancel{
+/* slide out animation */
+.container.downloading .button,
+.container.finished .cancel,
+.container.canceling .button,
+.container.canceling .cancel,
+.container.finished .bar,
+.container.idle .done,
+.container.idle.canceled .canceling {
     animation-duration: 0.3s;
     animation-name: slideout;
-    transform: translate(-50%, -300%);
-    animation-timing-function: cubic-bezier(.67,0,0,1);
+    transform: translate(-50%, -150%);
+    animation-timing-function: cubic-bezier(0.44, 0.46, 0, 1);
 }
 
 /*out left*/
-.button.canceling .bar{
+.container.canceling .bar{
     animation-duration: 0.3s;
     animation-name: slideout-left;
-    transform: translate(-200%, -50%);
+    transform: translate(-150%, -50%);
     animation-timing-function: cubic-bezier(.67,0,0,1);
 }
 
 @keyframes slidein {
   from {
-    transform: translate(-50%, 200%);
+    transform: translate(-50%, 150%);
   }
 
   to {
@@ -133,7 +143,7 @@ div.canceling{
   }
 
   to {
-    transform: translate(-50%, -300%);
+    transform: translate(-50%, -150%);
   }
 }
 
@@ -143,6 +153,6 @@ div.canceling{
   }
 
   to {
-    transform: translate(-300%, -50%);
+    transform: translate(-150%, -50%);
   }
 }

@@ -6,18 +6,19 @@
 </head>
 <body>
 
-    <div class="container">
-        <button class="button" id="button">
-            <canvas class="bar" id="bar"></canvas>
-            <div class="text">DOWNLOAD</div>
-            <div class="done"><span>DONE</span></div>
-            <div class="cancel"><span>Χ</span></div>
-            <div class="canceling"><span>CANCELING</span></div>
-        </button>
+    <div class="container noselect center" id="container">
+        <button class="button fill-container center" id="button">DOWNLOAD</button>
+        <canvas class="bar fill-container center" id="bar"></canvas>
+        <!-- <div class="text fill-container center"><span class="center">DOWNLOAD</span></div> -->
+        <div class="done fill-container center"><span class="center">DONE</span></div>
+        <div class="cancel fill-container center">
+            <div class="cancel-button" id="cancel-button">X</div>
+        </div>
+        <div class="canceling fill-container center"><span class="center">CANCELING</span></div>
     </div>
 
     <script src="vendor/random.min.js"></script>
-    <script src="main.js"></script>
+    <script src="bundle.js"></script>
 
 </body>
 </html>

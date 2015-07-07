@@ -1,7 +1,9 @@
 'use strict';
 
+var $buttonContainer = document.getElementById('container');
 var $button = document.getElementById('button');
 var canvas = document.getElementById('bar');
+var $cancelButton = document.getElementById('cancel-button');
 var ctx = canvas.getContext('2d');
 var animationFrameID = 0;
 var percentage = 0;
@@ -20,72 +22,86 @@ var random = new Random(Random.engines.mt19937().autoSeed());
 
 $button.onclick = function () {
 
-  if (state.canceling == false) {
-    state.downloading = !state.downloading;
+  if (state.downloading == false) {
+    state.downloading = true;
   }
 
+  //Starts download
   if (state.downloading && state.canceling == false) {
     count = 0;
-    $button.classList.remove('idle', 'canceling', 'finished', 'just-finished');
-    $button.classList.add('downloading');
+    $buttonContainer.classList.remove('idle', 'canceling', 'finished', 'canceled');
+    $buttonContainer.classList.add('downloading');
     state.finished = false;
     percentage = 0;
     width = 0;
     stateUpdate = fillBar;
     animationFrameID = requestAnimationFrame(update);
-  } else if (state.finished == false && state.canceling == false) {
+  }
+};
+
+$cancelButton.onclick = function () {
+
+  if (state.finished == false && state.canceling == false) {
+    //cancels download
     count = 0;
-    $button.classList.remove('downloading', 'idle', 'canceling', 'just-finished');
-    $button.classList.add('canceling');
+    $buttonContainer.classList.remove('downloading', 'idle', 'canceling', 'canceled');
+    $buttonContainer.classList.add('canceling');
     state.canceling = true;
     stateUpdate = canceling;
   }
 };
 
+//Fills the progress bar
 function fillBar() {
 
   percentage += random.bool(5, 40) ? random.real(0, 0.1) : 0;
   width += (canvas.width * percentage - width) * 0.05;
 
+  //when the download is done
   if (percentage >= 1) {
 
     stateUpdate = finishfillBar;
   }
 }
 
+//when the download is done
 function finishfillBar() {
 
   width += (canvas.width * percentage - width) * 0.9;
 
+  //when the bar is completely filled
   if (width >= canvas.width * percentage) {
     stateUpdate = finished;
     percentage = Math.min(percentage, 1);
     state.finished = true;
-    $button.classList.remove('downloading');
-    $button.classList.add('finished');
+    $buttonContainer.classList.remove('downloading');
+    $buttonContainer.classList.add('finished');
   }
 }
 
+//When Canceling
 function canceling() {
   count++;
 
+  //wait some time and set as canceled
   if (count >= 50) {
-    count = 0;
-    $button.classList.remove('downloading', 'finished', 'canceling', 'just-finished');
-    $button.classList.add('idle');
+    $buttonContainer.classList.remove('downloading', 'finished', 'canceling');
+    $buttonContainer.classList.add('idle', 'canceled');
     state.canceling = false;
     stateUpdate = null;
     cancelAnimationFrame(animationFrameID);
   }
 }
 
+//when the bar is completely filled
 function finished() {
   count++;
 
-  if (count >= 50) {
+  //Wait some time to hide 'done' message
+  if (count >= 60) {
     count = 0;
-    $button.classList.remove('downloading', 'finished', 'canceling');
-    $button.classList.add('idle', 'just-finished');
+    $buttonContainer.classList.remove('downloading', 'finished', 'canceling');
+    $buttonContainer.classList.add('idle');
     state.downloading = false;
     cancelAnimationFrame(animationFrameID);
   }
